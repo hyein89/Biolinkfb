@@ -20,6 +20,7 @@ export default function LinkPage({ item, absoluteImage }: Props) {
   return (
     <>
       <Head>
+        <meta charSet="utf-8" />
         <title>{item.title}</title>
         <meta name="description" content={item.title} />
 
@@ -44,22 +45,50 @@ export default function LinkPage({ item, absoluteImage }: Props) {
           rel="stylesheet"
         />
 
-        {/* FIX IKON — Material Symbols Rounded */}
+        {/* MATERIAL SYMBOLS — include variable axes so glyphs render */}
         <link
-          href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded"
+          href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD&display=swap"
           rel="stylesheet"
         />
       </Head>
 
+      {/* GLOBAL CSS FOR ICONS (pindahkan ke globals.css jika mau) */}
+      <style jsx global>{`
+        /* ensure the material symbol font is used and the right variation settings */
+        .material-symbols-rounded {
+          font-family: 'Material Symbols Rounded';
+          font-weight: 400;
+          font-style: normal;
+          font-size: 20px; /* sesuaikan kebutuhan */
+          line-height: 1;
+          letter-spacing: normal;
+          text-transform: none;
+          display: inline-block;
+          white-space: nowrap;
+          word-wrap: normal;
+          direction: ltr;
+          -webkit-font-feature-settings: 'liga';
+          -webkit-font-smoothing: antialiased;
+          /* IMPORTANT: set variation axes so it renders icons, bukan huruf */
+          font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 48;
+        }
+
+        /* optional alignment tweaks */
+        .name .material-symbols-rounded { vertical-align: middle; margin-left: 6px; }
+        .button .material-symbols-rounded { vertical-align: middle; margin-right: 8px; }
+
+        /* avoid overriding by any global * selector - keep specificity */
+      `}</style>
+
       {/* TEMPLATE */}
       <div className="container">
         <div className="avatar">
-          <img src={absoluteImage ?? ""} />
-         </div>
+          {/* kalau absoluteImage = null, lebih baik sembunyikan img atau beri placeholder */}
+          {absoluteImage ? <img src={absoluteImage} alt={item.title} /> : null}
+        </div>
 
         <div className="name">
-          {item.title}{" "}
-          <span className="material-symbols-rounded">verified</span>
+          {item.title} <span className="material-symbols-rounded">verified</span>
         </div>
 
         <p className="bio">
@@ -67,15 +96,15 @@ export default function LinkPage({ item, absoluteImage }: Props) {
         </p>
 
         <div className="buttons">
-          <a className="button wa">
+          <a className="button wa" href="#">
             <span className="material-symbols-rounded">chat</span> WhatsApp
           </a>
 
-          <a className="button tg">
+          <a className="button tg" href="#">
             <span className="material-symbols-rounded">send</span> Telegram
           </a>
 
-          <a className="button web">
+          <a className="button web" href="#">
             <span className="material-symbols-rounded">public</span> Website
           </a>
         </div>
