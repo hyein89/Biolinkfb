@@ -7,7 +7,8 @@ export default function App({ Component, pageProps }: AppProps) {
     <>
       <Head>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-
+        <link rel="icon" type="image/png" href="/2497746.png" />
+        <meta name="theme-color" content="#acd84d" />
         {/* PENTING: pasang font Material Symbols di sini, BUKAN di halaman */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
