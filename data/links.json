@@ -1,0 +1,12 @@
+[
+  {
+    "id": "123abc",
+    "title": "Deni Chan — Link",
+    "image_url": "https://images.example.com/deni-profile.png"
+  },
+  {
+    "id": "hello",
+    "title": "Hello Page",
+    "image_url": "https://images.example.com/hello-card.png"
+  }
+]
