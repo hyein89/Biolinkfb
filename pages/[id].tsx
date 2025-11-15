@@ -53,8 +53,8 @@ export default function LinkPage({ item, absoluteImage }: Props) {
       {/* TEMPLATE */}
       <div className="container">
         <div className="avatar">
-          <img src={absoluteImage} />
-        </div>
+          <img src={absoluteImage ?? ""} />
+         </div>
 
         <div className="name">
           {item.title}{" "}
