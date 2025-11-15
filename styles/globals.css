@@ -1,56 +1,205 @@
-/* Reset dasar */
-* {
+/* =============================
+   GLOBAL ANTI GESER
+============================= */
+html, body {
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
-}
-
-body {
-  font-family: Arial, Helvetica, sans-serif;
-  background: #f5f5f5;
-  color: #222;
-  -webkit-font-smoothing: antialiased;
-}
-
-main {
   width: 100%;
-  min-height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 20px;
+  overflow-x: hidden !important;
+}
+body {
+    background: #acd84d; 
+  }
+* { box-sizing: border-box; max-width: 100%; 
+     font-family: "Poppins", sans-serif;
 }
 
-h1 {
-  font-size: 2rem;
-  font-weight: 700;
-  margin-bottom: 10px;
+/* =============================
+   BACKGROUND FIXED
+============================= */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background: url("/bg2.jpg") center/cover no-repeat;
+  z-index: -1;
 }
 
-p {
-  font-size: 1rem;
-  opacity: 0.7;
-}
-
-img {
-  max-width: 100%;
-  border-radius: 12px;
-  margin-top: 15px;
-  box-shadow: 0 4px 18px rgba(0,0,0,0.2);
-}
-
-/* Halaman 404 */
-.error-container {
+/* =============================
+   WRAPPER
+============================= */
+.container {
+  width: 100%;
+  max-width: 430px;
+  margin: 0 auto;
+  padding: 20px 16px 160px;
   text-align: center;
 }
 
-/* Link hover (kalau nanti mau dipakai) */
-a {
-  color: #0070f3;
-  text-decoration: none;
-  transition: opacity .2s;
+/* =============================
+   AVATAR
+============================= */
+.avatar {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  overflow: hidden;
+  margin: 0 auto 18px;
+  box-shadow: 0 0 25px rgba(255,255,255,0.25);
+  border: 3px solid #acd84d; /* Border putih di sekitar gambar */
+}
+.avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
-a:hover {
-  opacity: .7;
+/* =============================
+   NAME
+============================= */
+.name {
+  font-size: clamp(1.6rem, 4vw, 2rem);
+  font-weight: 700;
+  color: #fff;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.name .material-icons {
+  color: #4da3ff;
+  animation: pulse 1.8s infinite ease;
+}
+@keyframes pulse {
+  0%,100% { transform: scale(1); }
+  50% { transform: scale(1.25); }
+}
+
+/* =============================
+   BIO
+============================= */
+.bio {
+  margin-top: 12px;
+  color: #eee;
+  font-size: clamp(0.9rem, 3vw, 1rem);
+  line-height: 1.5;
+  margin-bottom: 28px;
+  padding: 0 8px;
+}
+
+/* =============================
+   BUTTONS
+============================= */
+.buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  width: 100%;
+}
+
+a.button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 14px;
+  border-radius: 14px;
+  text-decoration: none;
+  color: #fff;
+  font-size: 1rem;
+  font-weight: 600;
+  gap: 10px;
+  width: 100%;
+  transition: 0.25s;
+}
+
+a.button:hover {
+  transform: scale(1.03);
+  filter: brightness(1.15);
+}
+
+.wa  { background: #25D366; }
+.tg  { background: #0088CC; }
+.web { background: #E53935; }
+
+/* =============================
+   POPUP ADS FIX
+============================= */
+.ads-popup {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.6);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  animation: fadeIn .4s ease forwards;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.ads-content {
+  background: white;
+  padding: 0;
+  border-radius: 18px;
+  overflow: hidden;
+  width: 92%;
+  max-width: 340px;
+  animation: slideUp .4s ease forwards;
+  position: relative;
+}
+
+@keyframes slideUp {
+  from { transform: translateY(40px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+.ads-content img {
+  width: 100%;
+  display: block;
+}
+
+.ads-close {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  background: rgba(0,0,0,0.65);
+  padding: 6px;
+  border-radius: 50%;
+  color: white;
+  cursor: pointer;
+  font-size: 22px;
+}
+
+.floating-btn {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: #111;
+  color: #fff;
+  padding: 16px 22px;
+  border-radius: 50px;
+  font-size: 16px;
+  font-weight: bold; /* <<<<< bikin teks tebal */
+  text-decoration: none;
+  box-shadow: 0 5px 14px rgba(0,0,0,0.25);
+  z-index: 9999;
+  border: 2px solid #ccc; 
+  animation: float 2.8s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%   { transform: translateY(0); }
+  50%  { transform: translateY(-8px); }
+  100% { transform: translateY(0); }
+}
+
+@media (max-width:480px){
+  .floating-btn{
+    padding: 12px 18px;
+    font-size: 14px;
+    bottom: 15px;
+    right: 15px;
+  }
 }
