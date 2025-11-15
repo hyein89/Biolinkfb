@@ -16,7 +16,7 @@ export default function App({ Component, pageProps }: AppProps) {
           href="https://fonts.googleapis.com/css2?family=Stack+Sans+Notch:wght@200..700&display=swap"
           rel="stylesheet"
         />
-        />
+        
       </Head>
 
       <Component {...pageProps} />
