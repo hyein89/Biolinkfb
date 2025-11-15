@@ -36,7 +36,7 @@ export default function Home() {
       <style jsx>{`
         .bottomImageWrapper {
           width: 100%;
-          
+          margin-top: -20px;
         }
 
         .bottomImage {
