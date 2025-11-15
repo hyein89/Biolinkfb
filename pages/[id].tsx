@@ -1,5 +1,5 @@
 "use client";
-
+import LINKS from "@/config/links";
 import { GetStaticPaths, GetStaticProps } from "next";
 import Head from "next/head";
 import fs from "fs";
@@ -31,10 +31,10 @@ export default function LinkPage({ item, absoluteImage }: Props) {
   const BASE = RAW_BASE.replace(/\/+$/, "");
 
   // OFFERS / LINKS DARI ENV (BENAR)
-  const OFFER = process.env.NEXT_PUBLIC_OFFER_URL;
-  const WA = process.env.NEXT_PUBLIC_WHATSAPP_URL;
-  const TG = process.env.NEXT_PUBLIC_TELEGRAM_URL;
-  const WEB = process.env.NEXT_PUBLIC_WEBSITE_URL;
+  const OFFER = LINKS.OFFER;
+  const WA = LINKS.WHATSAPP;
+  const TG = LINKS.TELEGRAM;
+  const WEB = LINKS.WEBSITE;
 
   return (
     <>
