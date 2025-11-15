@@ -6,7 +6,6 @@ export default function Home() {
       <Head>
         <title>Simple Bio Link</title>
         
-        {/* Added Meta Tags */}
         <meta name="description" content="Simple Bio Link — Create your micro landing page with custom branding and unlimited smart links." />
         <meta property="og:title" content="Simple Bio Link" />
         <meta property="og:description" content="Build your own micro-website and showcase your links with style." />
@@ -27,7 +26,6 @@ export default function Home() {
           </a>
         </div>
 
-        {/* Bottom Image Section */}
         <div className="bottomImageWrapper">
           <img src="/smart-links-static-landing.png" alt="Sports Banner" className="bottomImage" />
         </div>
@@ -46,16 +44,18 @@ export default function Home() {
           max-width: 900px;
           margin: 0 auto;
         }
+
         .title {
           font-size: 28px;
         }
-      `}        @media (min-width: 1024px) {
+
+        /* MEDIA QUERY HARUS ADA DI DALAM SINI */
+        @media (min-width: 1024px) {
           .bottomImage {
             max-width: 600px;
           }
         }
-        
-      </style>
+      `}</style>
     </>
   );
 }
