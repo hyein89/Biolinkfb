@@ -241,7 +241,7 @@ a.button:hover {
   justify-content: center;
   text-align: center;
 
-  padding: 20px;
+  
   animation: fadeIn 0.8s ease forwards;
 
   /* FIX: supaya tidak ketarik flex layout global */
@@ -252,7 +252,7 @@ a.button:hover {
   animation: float 3s ease-in-out infinite;
 
   /* FIX: mencegah animasi dorong ke luar layar */
-  max-width: 100%;
+  
   overflow: hidden;
 }
 
