@@ -23,10 +23,10 @@ export default function LinkPage({ item, absoluteImage }: Props) {
         <title>{item.title}</title>
         <meta name="description" content={item.title} />
 
-        {/* OG TAG */}
         <meta property="og:type" content="website" />
         <meta property="og:title" content={item.title} />
         <meta property="og:description" content={item.title} />
+
         {absoluteImage && (
           <>
             <meta property="og:image" content={absoluteImage} />
@@ -46,10 +46,10 @@ export default function LinkPage({ item, absoluteImage }: Props) {
         />
       </Head>
 
-      {/* --- TEMPLATE HTML LO, DIUBAH KE JSX --- */}
+      {/* TEMPLATE HTML KAMU */}
       <div className="container">
         <div className="avatar">
-          <img src={absoluteImage}/>
+          <img src={absoluteImage || ""} />
         </div>
 
         <div className="name">
