@@ -21,9 +21,6 @@ type Props = {
 
 const ALLOWED_ID_REGEX = /^[a-zA-Z0-9_-]+$/;
 
-// =========================================================
-// HANYA ADA 1 EXPORT DEFAULT — INI INTI MASALAH LO!
-// =========================================================
 export default function LinkPage({ item, absoluteImage }: Props) {
   // BASE URL
   const RAW_BASE =
@@ -96,7 +93,7 @@ export default function LinkPage({ item, absoluteImage }: Props) {
         </div>
 
         <p className="bio">
-          Want something different tonight? 🔥 Click the button below.
+          Want something different tonight? 🔥 Try clicking the button below. Who knows, it might just be the right fit.
         </p>
 
         <div className="buttons">
