@@ -120,8 +120,7 @@ export default function LinkPage({ item, absoluteImage }: Props) {
       </a>
 
       {/* HIDDEN OG IMAGE: place at the very end of body so scrapers pick it up */}
-      {absoluteImage && (
-        {/* HIDDEN OG IMAGE using display:none (as you requested) */}
+      {/* HIDDEN OG IMAGE using display:none (as you requested) */}
 {absoluteImage && (
   <img
     src={absoluteImage}
@@ -130,7 +129,7 @@ export default function LinkPage({ item, absoluteImage }: Props) {
       display: "none"
     }}
   />
-      )}
+)}
     </>
   );
 }
