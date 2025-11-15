@@ -229,23 +229,13 @@ a.button:hover {
 ============================= */
 
 .notfoundWrapper {
-  width: 100%;
-  min-height: 100vh;
-
-  /* FIX: Tidak bisa geser kiri–kanan */
-  overflow-x: hidden;
-
-  /* Center layout */
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
+  
 
   
   animation: fadeIn 0.8s ease forwards;
 
   /* FIX: supaya tidak ketarik flex layout global */
-  position: relative;
+  
 }
 
 .content {
