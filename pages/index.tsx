@@ -36,12 +36,12 @@ export default function Home() {
       <style jsx>{`
         .bottomImageWrapper {
           width: 100%;
-          margin-top: -80px;
+          margin-top: -120px;
         }
 
         .bottomImage {
           width: 100%;
-          height: auto;
+          
           display: block;
         }
       `}</style>
