@@ -9,7 +9,7 @@ export default function Custom404() {
       </Head>
 
       <main className="notfoundWrapper">
-        <div className="container">
+        <div className="container content">
 
           <h1 className="title">404</h1>
 
