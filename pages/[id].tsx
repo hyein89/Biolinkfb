@@ -17,71 +17,63 @@ type Props = {
 const ALLOWED_ID_REGEX = /^[a-zA-Z0-9_-]+$/
 
 export default function LinkPage({ item, absoluteImage }: Props) {
+  const BASE = process.env.NEXT_PUBLIC_BASE_URL || "https://tes.vercel.app"
+
   return (
     <>
       <Head>
-  <meta charSet="UTF-8" />
-  <meta
-    name="viewport"
-    content="width=device-width, initial-scale=1.0, maximum-scale=1"
-  />
-  <meta httpEquiv="Content-Type" content="text/html; charset=UTF-8" />
-  <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
+        <meta charSet="UTF-8" />
+        <meta
+          name="viewport"
+          content="width=device-width, initial-scale=1.0, maximum-scale=1"
+        />
 
-  <title>{item.title}</title>
-  <meta name="theme-color" content="#acd84d" />
-  <meta name="description" content={item.title} />
+        <title>{item.title}</title>
+        <meta name="description" content={item.title} />
+        <meta name="theme-color" content="#acd84d" />
 
-  {/* OG TAG */}
-  <meta property="og:locale" content="en_US" />
-  <meta property="og:type" content="website" />
+        {/* ======================= */}
+        {/*      OG META FIXED     */}
+        {/* ======================= */}
+        <meta property="og:type" content="website" />
+        <meta property="og:locale" content="en_US" />
+        <meta property="og:title" content={item.title} />
+        <meta property="og:description" content={item.title} />
 
-  {/* FIX NO.1 — OG URL HARUS ABSOLUTE */}
-  <meta
-    property="og:url"
-    content={`${process.env.NEXT_PUBLIC_BASE_URL}/${item.id}`}
-  />
+        {/* OG URL WAJIB ABSOLUTE */}
+        <meta property="og:url" content={`${BASE}/${item.id}`} />
 
-  <meta property="og:title" content={item.title} />
-  <meta property="og:description" content={item.title} />
-  <meta property="og:site_name" content={item.title} />
+        {/* OG IMAGE WAJIB ABSOLUTE */}
+        {absoluteImage && (
+          <meta property="og:image" content={absoluteImage} />
+        )}
 
-  {/* FIX NO.2 — OG IMAGE VALID */}
-  {absoluteImage && (
-    <>
-      <meta property="og:image" content={absoluteImage} />
-      <meta name="twitter:card" content="summary_large_image" />
-      <meta name="twitter:image" content={absoluteImage} />
-    </>
-  )}
+        {/* ======================= */}
+        {/*     TWITTER FIXED       */}
+        {/* ======================= */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content={item.title} />
+        <meta name="twitter:description" content={item.title} />
+        <meta name="twitter:image" content={absoluteImage || ""} />
+        <meta name="twitter:domain" content={BASE} />
 
-  <meta name="twitter:site" content="@" />
-  <meta name="twitter:title" content={item.title} />
-  <meta name="twitter:description" content={item.title} />
-  <meta name="twitter:creator" content="@" />
+        {/* CANONICAL WAJIB ABSOLUTE */}
+        <link rel="canonical" href={`${BASE}/${item.id}`} />
 
-  {/* FIX NO.3 — DOMAIN HARUS ISI */}
-  <meta name="twitter:domain" content={process.env.NEXT_PUBLIC_BASE_URL} />
+        <link rel="icon" type="image/png" href="/2497746.png" />
 
-  <link rel="icon" type="image/png" href="/2497746.png" />
-
-  {/* FIX NO.4 — CANONICAL TIDAK BOLEH KOSONG */}
-  <link
-    rel="canonical"
-    href={`${process.env.NEXT_PUBLIC_BASE_URL}/${item.id}`}
-  />
-
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link
-    rel="preconnect"
-    href="https://fonts.gstatic.com"
-    crossOrigin=""
-  />
-  <link
-    href="https://fonts.googleapis.com/css2?family=Stack+Sans+Notch:wght@200..700&display=swap"
-    rel="stylesheet"
-  />
-</Head>
+        {/* FONT */}
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link
+          rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossOrigin=""
+        />
+        <link
+          href="https://fonts.googleapis.com/css2?family=Stack+Sans+Notch:wght@200..700&display=swap"
+          rel="stylesheet"
+        />
+      </Head>
 
       {/* BODY TEMPLATE */}
       <div className="container">
@@ -137,7 +129,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
 
   try {
     items = JSON.parse(fs.readFileSync(dataPath, "utf-8"))
-  } catch (e) {
+  } catch {
     items = []
   }
 
@@ -158,10 +150,9 @@ export const getStaticProps: GetStaticProps = async (ctx) => {
     const raw = fs.readFileSync(dataPath, "utf-8")
     const items: LinkItem[] = JSON.parse(raw)
     const found = items.find((it) => it.id === id)
-
     if (!found) return { notFound: true }
 
-    const base = process.env.NEXT_PUBLIC_BASE_URL || "https://tes.varcel.app"
+    const BASE = process.env.NEXT_PUBLIC_BASE_URL || "https://tes.vercel.app"
 
     let absoluteImage: string | null = null
 
@@ -173,7 +164,7 @@ export const getStaticProps: GetStaticProps = async (ctx) => {
         }
       } catch {
         if (found.image_url.startsWith("/")) {
-          absoluteImage = base + found.image_url
+          absoluteImage = BASE + found.image_url
         }
       }
     }
