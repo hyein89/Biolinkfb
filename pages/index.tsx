@@ -44,6 +44,9 @@ export default function Home() {
           
           display: block;
         }
+        .title {
+font-size: 20px;
+}
       `}</style>
     </>
   );
