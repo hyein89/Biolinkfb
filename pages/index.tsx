@@ -43,11 +43,18 @@ export default function Home() {
           width: 100%;
           height: auto;
           display: block;
+          max-width: 900px;
+          margin: 0 auto;
         }
         .title {
-font-size: 28px;
-}
-      `}</style>
+          font-size: 28px;
+        }
+      `}        @media (min-width: 1024px) {
+          .bottomImage {
+            max-width: 600px;
+          }
+        }
+      </style>
     </>
   );
 }
