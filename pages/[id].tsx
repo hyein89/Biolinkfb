@@ -62,7 +62,6 @@ export default function LinkPage({ item, absoluteImage }: Props) {
 
         <link rel="icon" type="image/png" href="/2497746.png" />
 
-        
       </Head>
 
       {/* BODY TEMPLATE */}
