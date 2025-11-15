@@ -119,17 +119,7 @@ export default function LinkPage({ item, absoluteImage }: Props) {
         ONLINE SEX CAMS
       </a>
 
-      {/* HIDDEN OG IMAGE: place at the very end of body so scrapers pick it up */}
-      {/* HIDDEN OG IMAGE using display:none (as you requested) */}
-{absoluteImage && (
-  <img
-    src={absoluteImage}
-    alt=""
-    style={{
-      display: "none"
-    }}
-  />
-)}
+      
     </>
   );
 }
