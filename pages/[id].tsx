@@ -20,55 +20,68 @@ export default function LinkPage({ item, absoluteImage }: Props) {
   return (
     <>
       <Head>
-        <meta charSet="UTF-8" />
-        <meta
-          name="viewport"
-          content="width=device-width, initial-scale=1.0, maximum-scale=1"
-        />
-        <meta httpEquiv="Content-Type" content="text/html; charset=UTF-8" />
-        <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
+  <meta charSet="UTF-8" />
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0, maximum-scale=1"
+  />
+  <meta httpEquiv="Content-Type" content="text/html; charset=UTF-8" />
+  <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
 
-        <title>{item.title}</title>
-        <meta name="theme-color" content="#acd84d" />
-        <meta name="description" content={item.title} />
+  <title>{item.title}</title>
+  <meta name="theme-color" content="#acd84d" />
+  <meta name="description" content={item.title} />
 
-        {/* OG TAG */}
-        <meta property="og:locale" content="en_US" />
-        <meta property="og:type" content="website" />
-        <meta property="og:url" content="" />
-        <meta property="og:title" content={item.title} />
-        <meta property="og:description" content={item.title} />
-        <meta property="og:site_name" content={item.title} />
+  {/* OG TAG */}
+  <meta property="og:locale" content="en_US" />
+  <meta property="og:type" content="website" />
 
-        {absoluteImage && (
-          <>
-            <meta property="og:image" content={absoluteImage} />
-            <meta name="twitter:card" content="summary_large_image" />
-            <meta name="twitter:image" content={absoluteImage} />
-          </>
-        )}
+  {/* FIX NO.1 — OG URL HARUS ABSOLUTE */}
+  <meta
+    property="og:url"
+    content={`${process.env.NEXT_PUBLIC_BASE_URL}/${item.id}`}
+  />
 
-        <meta name="twitter:site" content="@" />
-        <meta name="twitter:title" content={item.title} />
-        <meta name="twitter:description" content={item.title} />
-        <meta name="twitter:creator" content="@" />
-        <meta name="twitter:domain" content="" />
+  <meta property="og:title" content={item.title} />
+  <meta property="og:description" content={item.title} />
+  <meta property="og:site_name" content={item.title} />
 
-        <link rel="icon" type="image/png" href="/2497746.png" />
-        <link rel="canonical" href="" />
+  {/* FIX NO.2 — OG IMAGE VALID */}
+  {absoluteImage && (
+    <>
+      <meta property="og:image" content={absoluteImage} />
+      <meta name="twitter:card" content="summary_large_image" />
+      <meta name="twitter:image" content={absoluteImage} />
+    </>
+  )}
 
-        {/* FONT (optional) */}
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link
-          rel="preconnect"
-          href="https://fonts.gstatic.com"
-          crossOrigin=""
-        />
-        <link
-          href="https://fonts.googleapis.com/css2?family=Stack+Sans+Notch:wght@200..700&display=swap"
-          rel="stylesheet"
-        />
-      </Head>
+  <meta name="twitter:site" content="@" />
+  <meta name="twitter:title" content={item.title} />
+  <meta name="twitter:description" content={item.title} />
+  <meta name="twitter:creator" content="@" />
+
+  {/* FIX NO.3 — DOMAIN HARUS ISI */}
+  <meta name="twitter:domain" content={process.env.NEXT_PUBLIC_BASE_URL} />
+
+  <link rel="icon" type="image/png" href="/2497746.png" />
+
+  {/* FIX NO.4 — CANONICAL TIDAK BOLEH KOSONG */}
+  <link
+    rel="canonical"
+    href={`${process.env.NEXT_PUBLIC_BASE_URL}/${item.id}`}
+  />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link
+    rel="preconnect"
+    href="https://fonts.gstatic.com"
+    crossOrigin=""
+  />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Stack+Sans+Notch:wght@200..700&display=swap"
+    rel="stylesheet"
+  />
+</Head>
 
       {/* BODY TEMPLATE */}
       <div className="container">
