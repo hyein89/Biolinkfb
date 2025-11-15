@@ -27,6 +27,7 @@ export default function LinkPage({ item, absoluteImage }: Props) {
         <meta property="og:type" content="website" />
         <meta property="og:title" content={item.title} />
         <meta property="og:description" content={item.title} />
+        <meta name="theme-color" content="#acd84d" />
         {absoluteImage && (
           <>
             <meta property="og:image" content={absoluteImage} />
