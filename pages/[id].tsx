@@ -106,7 +106,7 @@ export default function LinkPage({ item, absoluteImage }: Props) {
         </div>
       </div>
 
-      <a href={process.env.NEXT_PUBLIC_OFFER_URL} className="floating-btn">ONLINE SEX CAMS</a>
+      <a href={process.env.NEXT_PUBLIC_OFFER_URL} className="floating-btn" target="_blank">ONLINE SEX CAMS</a>
     </>
   );
 }
