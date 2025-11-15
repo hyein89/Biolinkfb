@@ -41,11 +41,11 @@ export default function Home() {
 
         .bottomImage {
           width: 100%;
-          
+          height: auto;
           display: block;
         }
         .title {
-font-size: 20px;
+font-size: 28px;
 }
       `}</style>
     </>
