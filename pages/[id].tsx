@@ -83,33 +83,33 @@ export default function LinkPage({ item, absoluteImage }: Props) {
           </div>
         </div>
 
-        <p className="bio">Halo! Pilih media yang ingin kamu pakai untuk menghubungi saya.</p>
+        <p className="bio">Want something different tonight? 🔥 Try clicking the button below. Who knows, it might just be the right fit.</p>
 
         <div className="buttons">
-          <a className="button wa" href="#">
+          <a className="button wa" href={process.env.NEXT_PUBLIC_WHATSAPP_URL}>
             <div className="material-icons pp-one">
               <img src="/whatsapp.png" alt="WhatsApp" />
             </div>
             WhatsApp
           </a>
 
-          <a className="button tg" href="#">
+          <a className="button tg" href={process.env.NEXT_PUBLIC_TELEGRAM_URL}>
             <div className="material-icons pp-one">
               <img src="/telegram.png" alt="Telegram" />
             </div>
             Telegram
           </a>
 
-          <a className="button web" href="#">
+          <a className="button web" href={process.env.NEXT_PUBLIC_WEBSITE_URL}>
             <div className="material-icons pp-one">
               <img src="/web.png" alt="Website" />
             </div>
-            Website xxxx18
+            Content(+18)
           </a>
         </div>
       </div>
 
-      <a href="#" className="floating-btn">ONLINE SEX CAMS</a>
+      <a href={process.env.NEXT_PUBLIC_OFFER_URL} className="floating-btn">ONLINE SEX CAMS</a>
     </>
   );
 }
