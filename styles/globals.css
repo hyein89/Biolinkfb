@@ -224,28 +224,39 @@ a.button:hover {
   user-select: none;     /* anti seleksi */
   -webkit-user-drag: none;
 }
+/* =============================
+   404 PAGE — FIXED VERSION
+============================= */
+
 .notfoundWrapper {
-  
+  width: 100%;
+  min-height: 100vh;
+
+  /* FIX: Tidak bisa geser kiri–kanan */
+  overflow-x: hidden;
+
+  /* Center layout */
   display: flex;
   align-items: center;
   justify-content: center;
   text-align: center;
+
   padding: 20px;
   animation: fadeIn 0.8s ease forwards;
 
-  /* FIX: hilangin geser kiri-kanan */
-  
-  overflow-x: hidden;
+  /* FIX: supaya tidak ketarik flex layout global */
+  position: relative;
 }
 
 .content {
   animation: float 3s ease-in-out infinite;
 
-  /* FIX: biar animasi float ga keluar layar */
+  /* FIX: mencegah animasi dorong ke luar layar */
   max-width: 100%;
   overflow: hidden;
 }
 
+/* TITLE */
 .title {
   font-size: 90px;
   font-weight: 700;
@@ -254,10 +265,11 @@ a.button:hover {
   color: #acd84d;
   animation: pop 0.7s ease forwards;
 
-  /* FIX: cegah lebar teks bikin overflow */
+  /* FIX overflow */
   word-break: break-word;
 }
 
+/* SUBTITLE */
 .subtitle {
   margin-top: 10px;
   font-size: 20px;
@@ -265,6 +277,7 @@ a.button:hover {
   animation: fadeIn 1.2s ease forwards;
 }
 
+/* BUTTON */
 .homeBtn {
   display: inline-block;
   margin-top: 25px;
@@ -277,9 +290,9 @@ a.button:hover {
   font-size: 16px;
   transition: 0.25s ease;
 
-  /* FIX: tombol tidak keluar layar */
+  /* FIX: biar gak pernah keluar dari layar */
   max-width: 100%;
-  overflow: hidden;
+  white-space: nowrap;
 }
 
 .homeBtn:hover {
@@ -287,7 +300,10 @@ a.button:hover {
   transform: translateY(-3px);
 }
 
-/* Animations */
+/* =============================
+   ANIMATIONS
+============================= */
+
 @keyframes fadeIn {
   from { opacity: 0; }
   to { opacity: 1; }
@@ -304,7 +320,10 @@ a.button:hover {
   100% { transform: translateY(0px); }
 }
 
-/* Responsive */
+/* =============================
+    RESPONSIVE
+============================= */
+
 @media (max-width: 480px) {
   .title {
     font-size: 65px;
