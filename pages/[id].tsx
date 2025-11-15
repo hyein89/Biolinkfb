@@ -62,12 +62,7 @@ export default function LinkPage({ item, absoluteImage }: Props) {
 
         <link rel="icon" type="image/png" href="/2497746.png" />
 
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
-        <link
-          href="https://fonts.googleapis.com/css2?family=Stack+Sans+Notch:wght@200..700&display=swap"
-          rel="stylesheet"
-        />
+        
       </Head>
 
       {/* BODY TEMPLATE */}
