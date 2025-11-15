@@ -225,7 +225,7 @@ a.button:hover {
   -webkit-user-drag: none;
 }
 .notfoundWrapper {
-  min-height: 100vh;
+  
   display: flex;
   align-items: center;
   justify-content: center;
@@ -234,7 +234,7 @@ a.button:hover {
   animation: fadeIn 0.8s ease forwards;
 
   /* FIX: hilangin geser kiri-kanan */
-  width: 100%;
+  
   overflow-x: hidden;
 }
 
