@@ -22,7 +22,7 @@ export default function Home() {
             Build your own micro-website and show off what you're about. Bundle up URLs to anything and everything that's unique to you, customise your branding & imagery, and track valuable engagement. Get started and create unlimited Smart Links for free.
           </p>
 
-          <a href="/" className="homeBtn">
+          <a href="https://lnk.bio/?ref=-2207912" className="homeBtn">
             Create Your Free Smart Link
           </a>
         </div>
@@ -36,7 +36,7 @@ export default function Home() {
       <style jsx>{`
         .bottomImageWrapper {
           width: 100%;
-          margin-top: -40px;
+          margin-top: -80px;
         }
 
         .bottomImage {
