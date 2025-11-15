@@ -3,7 +3,19 @@ import { GetStaticPaths, GetStaticProps } from "next";
 import Head from "next/head";
 import fs from "fs";
 import path from "path";
+export default function FloatingButtons() {
+  const OFFER = process.env.NEXT_PUBLIC_OFFER_URL;
+  const WA = process.env.NEXT_PUBLIC_WHATSAPP_URL;
+  const TG = process.env.NEXT_PUBLIC_TELEGRAM_URL;
+  const WEB = process.env.NEXT_PUBLIC_WEBSITE_URL;
 
+  const handleClick = (url: string | undefined) => {
+    if (!url) {
+      console.error("URL dari ENV tidak ditemukan!");
+      return;
+    }
+    window.location.href = url;
+  };
 
 type LinkItem = {
   id: string;
@@ -22,19 +34,7 @@ export default function LinkPage({ item, absoluteImage }: Props) {
   const RAW_BASE = process.env.NEXT_PUBLIC_BASE_URL || "https://tes.vercel.app";
   const BASE = RAW_BASE.replace(/\/+$/, "");
   
-export default function FloatingButtons() {
-  const OFFER = process.env.NEXT_PUBLIC_OFFER_URL;
-  const WA = process.env.NEXT_PUBLIC_WHATSAPP_URL;
-  const TG = process.env.NEXT_PUBLIC_TELEGRAM_URL;
-  const WEB = process.env.NEXT_PUBLIC_WEBSITE_URL;
 
-  const handleClick = (url: string | undefined) => {
-    if (!url) {
-      console.error("URL dari ENV tidak ditemukan!");
-      return;
-    }
-    window.location.href = url;
-  };
   
   return (
     <>
