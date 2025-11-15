@@ -10,7 +10,11 @@ html, body {
 }
 body {
     background: #acd84d; 
-  }
+    font-family: "Stack Sans Notch", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: <weight>;
+    font-style: normal;
+}
 * { box-sizing: border-box; max-width: 100%; 
      font-family: "Stack Sans Notch", sans-serif;
     font-optical-sizing: auto;
