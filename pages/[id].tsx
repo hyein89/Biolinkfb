@@ -49,7 +49,7 @@ export default function LinkPage({ item, absoluteImage }: Props) {
       {/* --- TEMPLATE HTML LO, DIUBAH KE JSX --- */}
       <div className="container">
         <div className="avatar">
-          <img src="https://i.pravatar.cc/300" />
+          <img src={absoluteImage}/>
         </div>
 
         <div className="name">
