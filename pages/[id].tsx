@@ -1,5 +1,5 @@
 "use client";
-import LINKS from "@/config/links";
+import LINKS from "../config/links";
 import { GetStaticPaths, GetStaticProps } from "next";
 import Head from "next/head";
 import fs from "fs";
