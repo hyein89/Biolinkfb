@@ -1,22 +1,13 @@
 "use client";
+
 import { GetStaticPaths, GetStaticProps } from "next";
 import Head from "next/head";
 import fs from "fs";
 import path from "path";
-export default function FloatingButtons() {
-  const OFFER = process.env.NEXT_PUBLIC_OFFER_URL;
-  const WA = process.env.NEXT_PUBLIC_WHATSAPP_URL;
-  const TG = process.env.NEXT_PUBLIC_TELEGRAM_URL;
-  const WEB = process.env.NEXT_PUBLIC_WEBSITE_URL;
 
-  const handleClick = (url: string | undefined) => {
-    if (!url) {
-      console.error("URL dari ENV tidak ditemukan!");
-      return;
-    }
-    window.location.href = url;
-  };
-
+// ========================
+// TYPE
+// ========================
 type LinkItem = {
   id: string;
   title: string;
@@ -30,12 +21,21 @@ type Props = {
 
 const ALLOWED_ID_REGEX = /^[a-zA-Z0-9_-]+$/;
 
+// =========================================================
+// HANYA ADA 1 EXPORT DEFAULT — INI INTI MASALAH LO!
+// =========================================================
 export default function LinkPage({ item, absoluteImage }: Props) {
-  const RAW_BASE = process.env.NEXT_PUBLIC_BASE_URL || "https://tes.vercel.app";
+  // BASE URL
+  const RAW_BASE =
+    process.env.NEXT_PUBLIC_BASE_URL || "https://tes.vercel.app";
   const BASE = RAW_BASE.replace(/\/+$/, "");
-  
 
-  
+  // OFFERS / LINKS DARI ENV (BENAR)
+  const OFFER = process.env.NEXT_PUBLIC_OFFER_URL;
+  const WA = process.env.NEXT_PUBLIC_WHATSAPP_URL;
+  const TG = process.env.NEXT_PUBLIC_TELEGRAM_URL;
+  const WEB = process.env.NEXT_PUBLIC_WEBSITE_URL;
+
   return (
     <>
       <Head>
@@ -50,7 +50,7 @@ export default function LinkPage({ item, absoluteImage }: Props) {
         <meta name="description" content={item.title} />
         <meta name="theme-color" content="#acd84d" />
 
-        {/* Open Graph */}
+        {/* OG */}
         <meta property="og:type" content="website" />
         <meta property="og:locale" content="en_US" />
         <meta property="og:title" content={item.title} />
@@ -73,17 +73,16 @@ export default function LinkPage({ item, absoluteImage }: Props) {
           content={absoluteImage || `${BASE}/og-default.png`}
         />
 
-        {/* Canonical */}
         <link rel="canonical" href={`${BASE}/${item.id}`} />
-
         <link rel="icon" type="image/png" href="/2497746.png" />
 
-
-        
-        <link href="https://fonts.googleapis.com/css2?family=Stack+Sans+Notch:wght@200..700&display=swap" rel="stylesheet" /> 
+        <link
+          href="https://fonts.googleapis.com/css2?family=Stack+Sans+Notch:wght@200..700&display=swap"
+          rel="stylesheet"
+        />
       </Head>
 
-      {/* BODY TEMPLATE */}
+      {/* BODY */}
       <div className="container">
         <div className="avatar">
           <img src={absoluteImage ?? "/og-default.png"} alt={item.title} />
@@ -96,7 +95,9 @@ export default function LinkPage({ item, absoluteImage }: Props) {
           </div>
         </div>
 
-        <p className="bio">Want something different tonight? 🔥 Try clicking the button below. Who knows, it might just be the right fit.</p>
+        <p className="bio">
+          Want something different tonight? 🔥 Click the button below.
+        </p>
 
         <div className="buttons">
           <a className="button wa" href={WA} target="_blank">
@@ -122,11 +123,17 @@ export default function LinkPage({ item, absoluteImage }: Props) {
         </div>
       </div>
 
-      <a href={OFFER} className="floating-btn" target="_blank">ONLINE SEX CAMS</a>
+      {/* FLOATING BUTTON */}
+      <a href={OFFER} className="floating-btn" target="_blank">
+        ONLINE SEX CAMS
+      </a>
     </>
   );
 }
 
+// =========================================================
+// STATIC PATHS
+// =========================================================
 export const getStaticPaths: GetStaticPaths = async () => {
   const dataPath = path.join(process.cwd(), "data", "links.json");
   let items: LinkItem[] = [];
@@ -141,6 +148,9 @@ export const getStaticPaths: GetStaticPaths = async () => {
   return { paths, fallback: "blocking" };
 };
 
+// =========================================================
+// STATIC PROPS
+// =========================================================
 export const getStaticProps: GetStaticProps = async (ctx) => {
   const id = String(ctx.params?.id || "");
 
@@ -156,23 +166,21 @@ export const getStaticProps: GetStaticProps = async (ctx) => {
     const found = items.find((it) => it.id === id);
     if (!found) return { notFound: true };
 
-    const rawBase = process.env.NEXT_PUBLIC_BASE_URL || "https://tes.vercel.app";
+    const rawBase =
+      process.env.NEXT_PUBLIC_BASE_URL || "https://tes.vercel.app";
     const BASE = rawBase.replace(/\/+$/, "");
 
     let absoluteImage: string | null = null;
 
     if (found.image_url) {
       try {
-        // Absolute URL
         new URL(found.image_url);
         absoluteImage = found.image_url;
       } catch {
-        // Relative → fix double slash
         absoluteImage = `${BASE}/${found.image_url.replace(/^\/+/, "")}`;
       }
     }
 
-    // Fallback
     if (!absoluteImage) {
       absoluteImage = `${BASE}/og-default.png`;
     }
