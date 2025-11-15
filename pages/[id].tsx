@@ -1,7 +1,12 @@
+"use client";
+
 import { GetStaticPaths, GetStaticProps } from "next";
 import Head from "next/head";
 import fs from "fs";
 import path from "path";
+
+
+
 
 type LinkItem = {
   id: string;
