@@ -1,23 +1,29 @@
-import { GetStaticPaths, GetStaticProps } from "next"
-import Head from "next/head"
-import fs from "fs"
-import path from "path"
+import { GetStaticPaths, GetStaticProps } from "next";
+import Head from "next/head";
+import fs from "fs";
+import path from "path";
 
 type LinkItem = {
-  id: string
-  title: string
-  image_url?: string
-}
+  id: string;
+  title: string;
+  image_url?: string;
+};
 
 type Props = {
-  item: LinkItem
-  absoluteImage?: string | null
-}
+  item: LinkItem;
+  absoluteImage?: string | null;
+};
 
-const ALLOWED_ID_REGEX = /^[a-zA-Z0-9_-]+$/
+const ALLOWED_ID_REGEX = /^[a-zA-Z0-9_-]+$/;
 
 export default function LinkPage({ item, absoluteImage }: Props) {
-  const BASE = process.env.NEXT_PUBLIC_BASE_URL || "https://tes.vercel.app"
+  // Normalized base (no trailing slash)
+  const RAW_BASE = process.env.NEXT_PUBLIC_BASE_URL || "https://tes.vercel.app";
+  const BASE = RAW_BASE.replace(/\/+$/, "");
+
+  // Recommended OG image dimensions (adjust if your images differ)
+  const OG_WIDTH = 1200;
+  const OG_HEIGHT = 630;
 
   return (
     <>
@@ -27,48 +33,43 @@ export default function LinkPage({ item, absoluteImage }: Props) {
           name="viewport"
           content="width=device-width, initial-scale=1.0, maximum-scale=1"
         />
+        <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
 
         <title>{item.title}</title>
         <meta name="description" content={item.title} />
         <meta name="theme-color" content="#acd84d" />
 
-        {/* ======================= */}
-        {/*      OG META FIXED     */}
-        {/* ======================= */}
+        {/* Open Graph */}
         <meta property="og:type" content="website" />
         <meta property="og:locale" content="en_US" />
         <meta property="og:title" content={item.title} />
         <meta property="og:description" content={item.title} />
-
-        {/* OG URL WAJIB ABSOLUTE */}
         <meta property="og:url" content={`${BASE}/${item.id}`} />
 
-        {/* OG IMAGE WAJIB ABSOLUTE */}
-        {absoluteImage && (
-          <meta property="og:image" content={absoluteImage} />
-        )}
+        {absoluteImage ? (
+          <>
+            <meta property="og:image" content={absoluteImage} />
+            <meta property="og:image:secure_url" content={absoluteImage} />
+            <meta property="og:image:type" content="image/png" />
+            <meta property="og:image:width" content={String(OG_WIDTH)} />
+            <meta property="og:image:height" content={String(OG_HEIGHT)} />
+          </>
+        ) : null}
 
-        {/* ======================= */}
-        {/*     TWITTER FIXED       */}
-        {/* ======================= */}
+        {/* Twitter */}
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content={item.title} />
         <meta name="twitter:description" content={item.title} />
-        <meta name="twitter:image" content={absoluteImage || ""} />
-        <meta name="twitter:domain" content={BASE} />
+        <meta name="twitter:image" content={absoluteImage || `${BASE}/og-default.png`} />
 
-        {/* CANONICAL WAJIB ABSOLUTE */}
+        {/* Canonical */}
         <link rel="canonical" href={`${BASE}/${item.id}`} />
 
         <link rel="icon" type="image/png" href="/2497746.png" />
 
-        {/* FONT */}
+        {/* Optional font (won't affect OG) */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link
-          rel="preconnect"
-          href="https://fonts.gstatic.com"
-          crossOrigin=""
-        />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
         <link
           href="https://fonts.googleapis.com/css2?family=Stack+Sans+Notch:wght@200..700&display=swap"
           rel="stylesheet"
@@ -78,7 +79,7 @@ export default function LinkPage({ item, absoluteImage }: Props) {
       {/* BODY TEMPLATE */}
       <div className="container">
         <div className="avatar">
-          <img src={absoluteImage ?? ""} alt={item.title} />
+          <img src={absoluteImage ?? "/og-default.png"} alt={item.title} />
         </div>
 
         <div className="name">
@@ -88,26 +89,24 @@ export default function LinkPage({ item, absoluteImage }: Props) {
           </div>
         </div>
 
-        <p className="bio">
-          Halo! Pilih media yang ingin kamu pakai untuk menghubungi saya.
-        </p>
+        <p className="bio">Halo! Pilih media yang ingin kamu pakai untuk menghubungi saya.</p>
 
         <div className="buttons">
-          <a className="button wa">
+          <a className="button wa" href="#">
             <div className="material-icons pp-one">
               <img src="/whatsapp.png" alt="WhatsApp" />
             </div>
             WhatsApp
           </a>
 
-          <a className="button tg">
+          <a className="button tg" href="#">
             <div className="material-icons pp-one">
               <img src="/telegram.png" alt="Telegram" />
             </div>
             Telegram
           </a>
 
-          <a className="button web">
+          <a className="button web" href="#">
             <div className="material-icons pp-one">
               <img src="/web.png" alt="Website" />
             </div>
@@ -119,58 +118,82 @@ export default function LinkPage({ item, absoluteImage }: Props) {
       <a href="#" className="floating-btn">
         ONLINE SEX CAMS
       </a>
+
+      {/* HIDDEN OG IMAGE: place at the very end of body so scrapers pick it up */}
+      {absoluteImage && (
+        <img
+          src={absoluteImage}
+          alt=""
+          style={{
+            position: "absolute",
+            width: 1,
+            height: 1,
+            opacity: 0,
+            pointerEvents: "none",
+            top: -99999,
+            left: -99999,
+          }}
+        />
+      )}
     </>
-  )
+  );
 }
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const dataPath = path.join(process.cwd(), "data", "links.json")
-  let items: LinkItem[] = []
+  const dataPath = path.join(process.cwd(), "data", "links.json");
+  let items: LinkItem[] = [];
 
   try {
-    items = JSON.parse(fs.readFileSync(dataPath, "utf-8"))
+    items = JSON.parse(fs.readFileSync(dataPath, "utf-8"));
   } catch {
-    items = []
+    items = [];
   }
 
-  const paths = items.map((it) => ({ params: { id: it.id } }))
-  return { paths, fallback: "blocking" }
-}
+  const paths = items.map((it) => ({ params: { id: it.id } }));
+  return { paths, fallback: "blocking" };
+};
 
 export const getStaticProps: GetStaticProps = async (ctx) => {
-  const id = String(ctx.params?.id || "")
+  const id = String(ctx.params?.id || "");
 
   if (!ALLOWED_ID_REGEX.test(id)) {
-    return { notFound: true }
+    return { notFound: true };
   }
 
-  const dataPath = path.join(process.cwd(), "data", "links.json")
+  const dataPath = path.join(process.cwd(), "data", "links.json");
 
   try {
-    const raw = fs.readFileSync(dataPath, "utf-8")
-    const items: LinkItem[] = JSON.parse(raw)
-    const found = items.find((it) => it.id === id)
-    if (!found) return { notFound: true }
+    const raw = fs.readFileSync(dataPath, "utf-8");
+    const items: LinkItem[] = JSON.parse(raw);
+    const found = items.find((it) => it.id === id);
+    if (!found) return { notFound: true };
 
-    const BASE = process.env.NEXT_PUBLIC_BASE_URL || "https://tes.vercel.app"
+    const rawBase = process.env.NEXT_PUBLIC_BASE_URL || "https://tes.vercel.app";
+    const BASE = rawBase.replace(/\/+$/, "");
 
-    let absoluteImage: string | null = null
+    let absoluteImage: string | null = null;
 
     if (found.image_url) {
       try {
-        const url = new URL(found.image_url)
+        // If image_url is already absolute
+        const url = new URL(found.image_url);
         if (url.protocol === "https:" || url.protocol === "http:") {
-          absoluteImage = found.image_url
+          absoluteImage = found.image_url;
         }
       } catch {
-        if (found.image_url.startsWith("/")) {
-          absoluteImage = BASE + found.image_url
-        }
+        // relative path: ensure leading slash and join with BASE
+        const rel = found.image_url.startsWith("/") ? found.image_url : `/${found.image_url}`;
+        absoluteImage = `${BASE}${rel}`;
       }
     }
 
-    return { props: { item: found, absoluteImage }, revalidate: 30 }
-  } catch {
-    return { notFound: true }
+    // final fallback if still null: ensure a valid absolute image exists in /public
+    if (!absoluteImage) {
+      absoluteImage = `${BASE}/og-default.png`; // make sure public/og-default.png exists
+    }
+
+    return { props: { item: found, absoluteImage }, revalidate: 30 };
+  } catch (err) {
+    return { notFound: true };
   }
-}
+};
