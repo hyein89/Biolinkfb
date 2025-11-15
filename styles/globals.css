@@ -224,7 +224,6 @@ a.button:hover {
   user-select: none;     /* anti seleksi */
   -webkit-user-drag: none;
 }
-
 .notfoundWrapper {
   min-height: 100vh;
   display: flex;
@@ -233,10 +232,18 @@ a.button:hover {
   text-align: center;
   padding: 20px;
   animation: fadeIn 0.8s ease forwards;
+
+  /* FIX: hilangin geser kiri-kanan */
+  width: 100%;
+  overflow-x: hidden;
 }
 
 .content {
   animation: float 3s ease-in-out infinite;
+
+  /* FIX: biar animasi float ga keluar layar */
+  max-width: 100%;
+  overflow: hidden;
 }
 
 .title {
@@ -246,6 +253,9 @@ a.button:hover {
   letter-spacing: -2px;
   color: #acd84d;
   animation: pop 0.7s ease forwards;
+
+  /* FIX: cegah lebar teks bikin overflow */
+  word-break: break-word;
 }
 
 .subtitle {
@@ -266,6 +276,10 @@ a.button:hover {
   font-weight: 600;
   font-size: 16px;
   transition: 0.25s ease;
+
+  /* FIX: tombol tidak keluar layar */
+  max-width: 100%;
+  overflow: hidden;
 }
 
 .homeBtn:hover {
@@ -299,4 +313,3 @@ a.button:hover {
     font-size: 17px;
   }
 }
-
