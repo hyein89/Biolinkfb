@@ -8,11 +8,19 @@ export default function Custom404() {
         <meta name="robots" content="noindex, nofollow" />
       </Head>
 
-      <main className={styles.notfoundWrapper}>
-        <div className={styles.content}>
-          <h1 className={styles.title}>404</h1>
-          <p className={styles.subtitle}>Oops... This page doesn’t exist.</p>
-          <a href="/" className={styles.homeBtn}>Go Back Home</a>
+      <main className="notfoundWrapper">
+        <div className="content">
+
+          <h1 className="title">404</h1>
+
+          <p className="subtitle">
+            Oops... This page doesn’t exist.
+          </p>
+
+          <a href="/" className="homeBtn">
+            Go Back Home
+          </a>
+
         </div>
       </main>
     </>
