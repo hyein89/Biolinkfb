@@ -11,7 +11,7 @@ type LinkItem = {
 
 type Props = {
   item: LinkItem;
-  absoluteImage: string;
+  absoluteImage?: string | null;
 };
 
 const ALLOWED_ID_REGEX = /^[a-zA-Z0-9_-]+$/;
@@ -20,52 +20,60 @@ export default function LinkPage({ item, absoluteImage }: Props) {
   const RAW_BASE = process.env.NEXT_PUBLIC_BASE_URL || "https://tes.vercel.app";
   const BASE = RAW_BASE.replace(/\/+$/, "");
 
-  const OG_WIDTH = 1200;
-  const OG_HEIGHT = 630;
-
   return (
     <>
       <Head>
         <meta charSet="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta
+          name="viewport"
+          content="width=device-width, initial-scale=1.0, maximum-scale=1"
+        />
+        <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
 
         <title>{item.title}</title>
         <meta name="description" content={item.title} />
-        <meta name="image" content={absoluteImage} />
         <meta name="theme-color" content="#acd84d" />
 
-        {/* -------------------- OPEN GRAPH -------------------- */}
+        {/* Open Graph */}
         <meta property="og:type" content="website" />
+        <meta property="og:locale" content="en_US" />
         <meta property="og:title" content={item.title} />
         <meta property="og:description" content={item.title} />
         <meta property="og:url" content={`${BASE}/${item.id}`} />
 
-        {/* WAJIB ABSOLUTE URL */}
-        <meta property="og:image" content={absoluteImage} />
-        <meta property="og:image:secure_url" content={absoluteImage} />
-        <meta property="og:image:type" content="image/png" />
-        <meta property="og:image:width" content={String(OG_WIDTH)} />
-        <meta property="og:image:height" content={String(OG_HEIGHT)} />
-        <meta property="og:image:alt" content={item.title} />
+        {absoluteImage && (
+          <>
+            <meta property="og:image" content={absoluteImage} />
+            <meta property="og:image:secure_url" content={absoluteImage} />
+          </>
+        )}
 
-        {/* -------------------- TWITTER -------------------- */}
+        {/* Twitter */}
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content={item.title} />
         <meta name="twitter:description" content={item.title} />
-        <meta name="twitter:image" content={absoluteImage} />
+        <meta
+          name="twitter:image"
+          content={absoluteImage || `${BASE}/og-default.png`}
+        />
 
         {/* Canonical */}
         <link rel="canonical" href={`${BASE}/${item.id}`} />
 
         <link rel="icon" type="image/png" href="/2497746.png" />
+
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
+        <link
+          href="https://fonts.googleapis.com/css2?family=Stack+Sans+Notch:wght@200..700&display=swap"
+          rel="stylesheet"
+        />
       </Head>
 
-      {/* ---------------------------------------------------
-        BODY
-      ---------------------------------------------------- */}
+      {/* BODY TEMPLATE */}
       <div className="container">
         <div className="avatar">
-          <img src={absoluteImage} alt={item.title} />
+          <img src={absoluteImage ?? "/og-default.png"} alt={item.title} />
         </div>
 
         <div className="name">
@@ -75,9 +83,7 @@ export default function LinkPage({ item, absoluteImage }: Props) {
           </div>
         </div>
 
-        <p className="bio">
-          Halo! Pilih media yang ingin kamu pakai untuk menghubungi saya.
-        </p>
+        <p className="bio">Halo! Pilih media yang ingin kamu pakai untuk menghubungi saya.</p>
 
         <div className="buttons">
           <a className="button wa" href="#">
@@ -103,9 +109,7 @@ export default function LinkPage({ item, absoluteImage }: Props) {
         </div>
       </div>
 
-      <a href="#" className="floating-btn">
-        ONLINE SEX CAMS
-      </a>
+      <a href="#" className="floating-btn">ONLINE SEX CAMS</a>
     </>
   );
 }
@@ -121,7 +125,6 @@ export const getStaticPaths: GetStaticPaths = async () => {
   }
 
   const paths = items.map((it) => ({ params: { id: it.id } }));
-
   return { paths, fallback: "blocking" };
 };
 
@@ -138,34 +141,30 @@ export const getStaticProps: GetStaticProps = async (ctx) => {
     const raw = fs.readFileSync(dataPath, "utf-8");
     const items: LinkItem[] = JSON.parse(raw);
     const found = items.find((it) => it.id === id);
-
     if (!found) return { notFound: true };
 
     const rawBase = process.env.NEXT_PUBLIC_BASE_URL || "https://tes.vercel.app";
     const BASE = rawBase.replace(/\/+$/, "");
 
-    let absoluteImage = `${BASE}/og-default.png`; // default fallback
+    let absoluteImage: string | null = null;
 
     if (found.image_url) {
       try {
-        // Jika sudah absolute
-        const url = new URL(found.image_url);
-        if (url.protocol === "http:" || url.protocol === "https:") {
-          absoluteImage = found.image_url;
-        }
+        // Absolute URL
+        new URL(found.image_url);
+        absoluteImage = found.image_url;
       } catch {
-        // Jika relative file di /public
-        const rel = found.image_url.startsWith("/")
-          ? found.image_url
-          : `/${found.image_url}`;
-        absoluteImage = `${BASE}${rel}`;
+        // Relative → fix double slash
+        absoluteImage = `${BASE}/${found.image_url.replace(/^\/+/, "")}`;
       }
     }
 
-    return {
-      props: { item: found, absoluteImage },
-      revalidate: 60,
-    };
+    // Fallback
+    if (!absoluteImage) {
+      absoluteImage = `${BASE}/og-default.png`;
+    }
+
+    return { props: { item: found, absoluteImage }, revalidate: 30 };
   } catch {
     return { notFound: true };
   }
