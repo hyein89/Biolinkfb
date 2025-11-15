@@ -52,7 +52,7 @@ export default function Home() {
         /* MEDIA QUERY HARUS ADA DI DALAM SINI */
         @media (min-width: 1024px) {
           .bottomImage {
-            max-width: 600px;
+            max-width: 400px;
           }
         }
       `}</style>
