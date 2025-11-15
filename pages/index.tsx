@@ -54,7 +54,7 @@ export default function Home() {
             max-width: 600px;
           }
         }
-        }
+        
       </style>
     </>
   );
