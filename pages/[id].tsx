@@ -47,37 +47,26 @@ export default function LinkPage({ item, absoluteImage }: Props) {
 
         {/* MATERIAL SYMBOLS — include variable axes so glyphs render */}
         <link
-          href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD&display=swap"
-          rel="stylesheet"
-        />
+  href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@48,400,0,0"
+  rel="stylesheet"
+/>
       </Head>
 
       {/* GLOBAL CSS FOR ICONS (pindahkan ke globals.css jika mau) */}
       <style jsx global>{`
-        /* ensure the material symbol font is used and the right variation settings */
-        .material-symbols-rounded {
-          font-family: 'Material Symbols Rounded';
-          font-weight: 400;
-          font-style: normal;
-          font-size: 20px; /* sesuaikan kebutuhan */
-          line-height: 1;
-          letter-spacing: normal;
-          text-transform: none;
-          display: inline-block;
-          white-space: nowrap;
-          word-wrap: normal;
-          direction: ltr;
-          -webkit-font-feature-settings: 'liga';
-          -webkit-font-smoothing: antialiased;
-          /* IMPORTANT: set variation axes so it renders icons, bukan huruf */
-          font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 48;
-        }
-
-        /* optional alignment tweaks */
-        .name .material-symbols-rounded { vertical-align: middle; margin-left: 6px; }
-        .button .material-symbols-rounded { vertical-align: middle; margin-right: 8px; }
-
-        /* avoid overriding by any global * selector - keep specificity */
+       .material-symbols-rounded {
+  font-family: "Material Symbols Rounded" !important;
+  font-weight: normal;
+  font-style: normal;
+  font-size: 22px;
+  line-height: 1;
+  display: inline-block;
+  font-variation-settings:
+    "FILL" 0,
+    "wght" 400,
+    "GRAD" 0,
+    "opsz" 48;
+}
       `}</style>
 
       {/* TEMPLATE */}
