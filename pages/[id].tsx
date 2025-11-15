@@ -101,7 +101,7 @@ export default function LinkPage({ item, absoluteImage }: Props) {
             Telegram
           </a>
 
-          <a className="button web"{WEB} target="_blank">
+          <a className="button web" href={WEB} target="_blank">
             <div className="material-icons pp-one">
               <img src="/web.png" alt="Website" />
             </div>
