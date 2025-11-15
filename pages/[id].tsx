@@ -19,6 +19,10 @@ const ALLOWED_ID_REGEX = /^[a-zA-Z0-9_-]+$/;
 export default function LinkPage({ item, absoluteImage }: Props) {
   const RAW_BASE = process.env.NEXT_PUBLIC_BASE_URL || "https://tes.vercel.app";
   const BASE = RAW_BASE.replace(/\/+$/, "");
+  const OFFER = process.env.NEXT_PUBLIC_OFFER_URL;
+  const WA = process.env.NEXT_PUBLIC_WHATSAPP;
+  const TG = process.env.NEXT_PUBLIC_TELEGRAM;
+  const WEB = process.env.NEXT_PUBLIC_WEBSITE;
 
   return (
     <>
@@ -83,21 +87,21 @@ export default function LinkPage({ item, absoluteImage }: Props) {
         <p className="bio">Want something different tonight? 🔥 Try clicking the button below. Who knows, it might just be the right fit.</p>
 
         <div className="buttons">
-          <a className="button wa" href={process.env.NEXT_PUBLIC_WHATSAPP_URL}>
+          <a className="button wa" href={WA} target="_blank">
             <div className="material-icons pp-one">
               <img src="/whatsapp.png" alt="WhatsApp" />
             </div>
             WhatsApp
           </a>
 
-          <a className="button tg" href={process.env.NEXT_PUBLIC_TELEGRAM_URL}>
+          <a className="button tg" href={TG} target="_blank">
             <div className="material-icons pp-one">
               <img src="/telegram.png" alt="Telegram" />
             </div>
             Telegram
           </a>
 
-          <a className="button web" href={process.env.NEXT_PUBLIC_WEBSITE_URL}>
+          <a className={WEB} target="_blank">
             <div className="material-icons pp-one">
               <img src="/web.png" alt="Website" />
             </div>
@@ -106,7 +110,7 @@ export default function LinkPage({ item, absoluteImage }: Props) {
         </div>
       </div>
 
-      <a href="https://google.com" className="floating-btn" target="_blank">ONLINE SEX CAMS</a>
+      <a href={OFFER} className="floating-btn" target="_blank">ONLINE SEX CAMS</a>
     </>
   );
 }
