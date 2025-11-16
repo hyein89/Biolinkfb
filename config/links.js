@@ -2,9 +2,9 @@
 const LINKS = {
   OFFER: "https://shorturl.at/5ZzMm",
 
-  WHATSAPP: "https://wa.me/6281234567890",
+  WHATSAPP: "https://shorturl.at/NAi5n",
 
-  TELEGRAM: "https://t.me/usernameanda",
+  TELEGRAM: "https://shorturl.at/NAi5n",
 
   WEBSITE: "https://shorturl.at/amyJq"
 };
