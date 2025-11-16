@@ -12,6 +12,7 @@ module.exports = {
       }
     ]
   },
+
   async headers() {
     return [
       {
@@ -24,23 +25,25 @@ module.exports = {
             key: 'Strict-Transport-Security',
             value: 'max-age=63072000; includeSubDomains; preload'
           },
-          {
-            key: 'Permissions-Policy',
-            value: 'geolocation=(), camera=(), microphone=()'
-          },
+
+          // ========================== CSP FIX DI SINI ==========================
           {
             key: 'Content-Security-Policy',
             value:
-              "default-src 'self'; " +
-              "img-src 'self' data: https:; " +
-              "connect-src 'self'; " +
-              "frame-ancestors 'none'; " +
-              "base-uri 'self'; " +
-              "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; " +
-              "font-src 'self' https://fonts.gstatic.com data:;"
+              [
+                "default-src 'self'",
+                "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://s10.histats.com",
+                "img-src 'self' data: https: https://sstatic1.histats.com",
+                "connect-src 'self' https://s10.histats.com",
+                "frame-ancestors 'none'",
+                "base-uri 'self'",
+                "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
+                "font-src 'self' https://fonts.gstatic.com data:"
+              ].join('; ')
           }
+          // ======================================================================
         ]
       }
-    ]
+    ];
   }
 };
