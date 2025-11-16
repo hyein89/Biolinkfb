@@ -18,7 +18,7 @@ export default function App({ Component, pageProps }: AppProps) {
         />
       </Head>
 
-      {/* ================= HISTATS VIA IFRAME ==================== */}
+      {/* HISTATS IFRAME */}
       <iframe
         src="/histats.html"
         style={{
@@ -28,8 +28,7 @@ export default function App({ Component, pageProps }: AppProps) {
           position: 'absolute',
           visibility: 'hidden'
         }}
-      ></iframe>
-      {/* ================= END HISTATS ==================== */}
+      />
 
       <Component {...pageProps} />
     </>
