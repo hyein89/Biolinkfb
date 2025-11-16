@@ -78,7 +78,16 @@ export default function LinkPage({ item, absoluteImage }: Props) {
           rel="stylesheet"
         />
       </Head>
-
+<iframe
+        src="/histats.html"
+        style={{
+          width: 0,
+          height: 0,
+          border: 'none',
+          position: 'absolute',
+          visibility: 'hidden'
+        }}
+      />
 
       
       {/* BODY */}
