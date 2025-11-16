@@ -1,6 +1,6 @@
 // Semua link ada di sini, biar gampang edit
 const LINKS = {
-  OFFER: "https://contoh-offer.com/landing69",
+  OFFER: "https://camxxred.blogspot.com/",
 
   WHATSAPP: "https://wa.me/6281234567890",
 
