@@ -44,16 +44,19 @@ export default function LinkPage({ item, absoluteImage }: Props) {
         <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
 
         <title>{item.title}</title>
-        <meta name="description" content={item.title} />
+        <meta
+  property="og:description"
+  content={`${item.title} — Explore my cute bio page with exclusive links, private offers, and personal contacts.`}
+/>
+
         <meta name="theme-color" content="#acd84d" />
 
         {/* OG */}
         <meta property="og:type" content="website" />
         <meta property="og:locale" content="en_US" />
         <meta property="og:title" content={item.title} />
-        <meta property="og:description" content={item.title} />
+        <meta property="og:description" content={`${item.title} — Explore my cute bio page with exclusive links, private offers, and personal contacts.`} />
         <meta property="og:url" content={`${BASE}/${item.id}`} />
-
         {absoluteImage && (
           <>
             <meta property="og:image" content={absoluteImage} />
