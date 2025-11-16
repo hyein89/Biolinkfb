@@ -11,6 +11,7 @@ export default function App({ Component, pageProps }: AppProps) {
         <link rel="icon" type="image/png" href="/2497746.png" />
         <meta name="theme-color" content="#acd84d" />
 
+        {/* Font */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
         <link
@@ -19,11 +20,11 @@ export default function App({ Component, pageProps }: AppProps) {
         />
       </Head>
 
-      {/* === Tambahkan Histats di sini === */}
+      {/* ================== HISTATS ================== */}
       <Script id="histats-script" strategy="afterInteractive">
         {`
           var _Hasync = _Hasync || [];
-          _Hasync.push(['Histats.start', '1,4828760,4,0,0,0,00010000']);
+          _Hasync.push(['Histats.start', '4828760', '4', '0', '0', '0']);
           _Hasync.push(['Histats.fasi', '1']);
           _Hasync.push(['Histats.track_hits', '']);
           (function() {
@@ -35,7 +36,14 @@ export default function App({ Component, pageProps }: AppProps) {
           })();
         `}
       </Script>
-      {/* === END Histats === */}
+
+      {/* Optional untuk user tanpa JS */}
+      <noscript>
+        <a href="/" target="_blank">
+          <img src="https://sstatic1.histats.com/0.gif?4828760&101" alt="histats" />
+        </a>
+      </noscript>
+      {/* ================== END HISTATS ================== */}
 
       <Component {...pageProps} />
     </>
