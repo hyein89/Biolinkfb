@@ -79,6 +79,41 @@ export default function LinkPage({ item, absoluteImage }: Props) {
         />
       </Head>
 
+{/* ================= HISTATS ==================== */}
+      <Script id="histats" strategy="afterInteractive">
+        {`
+          window._Hasync = window._Hasync || [];
+          window._Hasync.push(['Histats.start', '4828760', '4', '0', '0', '0']);
+          window._Hasync.push(['Histats.fasi', '1']);
+          window._Hasync.push(['Histats.track_hits', '']);
+
+          function loadHistats() {
+            var hs = document.createElement('script');
+            hs.type = 'text/javascript';
+            hs.async = true;
+            hs.src = 'https://s10.histats.com/js15_as.js';
+            document.body.appendChild(hs);
+          }
+
+          if (document.readyState === 'complete') {
+            loadHistats();
+          } else {
+            window.addEventListener('load', loadHistats);
+          }
+        `}
+      </Script>
+
+      <noscript>
+        <a href="/" target="_blank">
+          <img
+            src="https://sstatic1.histats.com/0.gif?4828760&101"
+            alt="histats"
+          />
+        </a>
+      </noscript>
+      {/* =============== END HISTATS ================= */}
+
+      
       {/* BODY */}
       <div className="container">
         <div className="avatar">
