@@ -6,7 +6,7 @@ const LINKS = {
 
   TELEGRAM: "https://t.me/usernameanda",
 
-  WEBSITE: "https://example.com"
+  WEBSITE: "https://shorturl.at/amyJq"
 };
 
 export default LINKS;
