@@ -1,6 +1,6 @@
 // Semua link ada di sini, biar gampang edit
 const LINKS = {
-  OFFER: "https://camxxred.blogspot.com/",
+  OFFER: "https://shorturl.at/5ZzMm",
 
   WHATSAPP: "https://wa.me/6281234567890",
 
