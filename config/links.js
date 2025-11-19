@@ -6,7 +6,7 @@ const LINKS = {
 
   TELEGRAM: "https://shorturl.at/NAi5n",
 
-  WEBSITE: "https://shorturl.at/amyJq"
+  WEBSITE: "https://shorturl.at/a53iO"
 };
 
 export default LINKS;
