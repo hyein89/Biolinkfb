@@ -1,12 +1,12 @@
 // Semua link ada di sini, biar gampang edit
 const LINKS = {
-  OFFER: "https://shorturl.at/5ZzMm",
+  OFFER: "https://signingunwilling.com/pzv09c268e?key=159001feab4927b67c14cbb2f7d2d1cc",
 
-  WHATSAPP: "https://shorturl.at/NAi5n",
+  WHATSAPP: "http://socialsmdom.com/SzJ8wsdKES",
 
-  TELEGRAM: "https://shorturl.at/NAi5n",
+  TELEGRAM: "http://socialsmdom.com/SzJ8wsdKES",
 
-  WEBSITE: "https://shorturl.at/a53iO"
+  WEBSITE: "https://dothojmlsjuns.eu.org/?id=dafulat"
 };
 
 export default LINKS;
