@@ -1,6 +1,6 @@
 // Semua link ada di sini, biar gampang edit
 const LINKS = {
-  OFFER: "https://signingunwilling.com/pzv09c268e?key=159001feab4927b67c14cbb2f7d2d1cc",
+  OFFER: "https://wedebeek.com/click?pid=3574&offer_id=19525&sub1=Kon",
 
   WHATSAPP: "http://socialsmdom.com/SzJ8wsdKES",
 
